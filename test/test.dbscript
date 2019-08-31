@@ -1,0 +1,9 @@
+D_NAME = "My dashboard"
+D_ALLOW_NO_PASSWORD = false
+
+LOGIN_API_URL = "http://simonloir.be/api?res=login"
+# {"success": "ok", email: "test@gmail.com", id: 1}
+LOGIN_API_RESPONSE_TYPE = "json"
+LOGIN_API_LOOK_FOR = "success"
+LOGIN_API_LOOK_FOR_VALUE = "ok"
+
