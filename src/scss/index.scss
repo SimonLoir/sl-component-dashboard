@@ -27,8 +27,8 @@ body {
 
     .d-content {
         display: grid;
-        grid-template-columns: auto auto auto auto;
-        grid-template-rows: repeat(20, 200px);
+        grid-template-columns: repeat(20, 250px);
+        grid-template-rows: repeat(20, 150px);
         grid-gap: 25px;
         position: absolute;
 
@@ -45,15 +45,31 @@ body {
         margin: auto;
 
         .panel {
+            position: relative;
             border-radius: 6px;
             border: 1px solid $theme-color;
             padding: 25px;
+            padding-top: 70px;
+            padding-bottom: 30px;
             background: white;
 
             .header {
+                display: inline-block;
+                position: absolute;
+                left: 25px;
+                top: 32px;
                 color: rgb(135, 152, 173);
                 text-transform: uppercase;
                 font-size: 9px;
+            }
+
+            .content {
+                display: block;
+                position: relative;
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                height: 100%;
             }
         }
     }
