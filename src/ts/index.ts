@@ -1,4 +1,3 @@
-import '../scss/index.scss';
 import dashboard from './dashboard';
 
 let d = new dashboard();

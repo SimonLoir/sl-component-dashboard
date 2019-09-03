@@ -1,3 +1,4 @@
+import '../../scss/index.scss';
 import { $, ExtJsObject } from '../tools/extjs';
 import Panel from '../components/panel';
 
