@@ -1,3 +1,4 @@
+import '../../scss/index.scss';
 import { $, ExtJsObject } from '../tools/extjs';
 
 export default class dashboard {
