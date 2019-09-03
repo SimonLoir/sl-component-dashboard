@@ -12,7 +12,10 @@
     },
     "author": "Simon Loir",
     "license": "MIT",
-    "dependencies": {},
+    "dependencies": {
+        "@types/chart.js": "^2.8.4",
+        "chart.js": "^2.8.0"
+    },
     "devDependencies": {
         "css-loader": "^0.28.11",
         "electron": "^6.0.0",

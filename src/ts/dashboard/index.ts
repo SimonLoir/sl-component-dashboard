@@ -1,5 +1,6 @@
 import '../../scss/index.scss';
 import { $, ExtJsObject } from '../tools/extjs';
+import Panel from '../components/panel';
 
 export default class dashboard {
     private d: ExtJsObject;
@@ -77,16 +78,7 @@ export default class dashboard {
         spanCol = 1,
         spanRow = 1
     ) {
-        let panel = this.dc.child('div');
-        panel.addClass('panel');
-        panel.css('gridColumnStart', col.toString());
-        panel.css('gridRowStart', row.toString());
-        panel.css('gridColumnEnd', (col + spanCol).toString());
-        panel.css('gridRowEnd', (row + spanRow).toString());
-        panel
-            .child('div')
-            .addClass('header')
-            .text(title);
+        return new Panel(this.dc, title, col, row, spanCol, spanRow);
     }
 }
 
