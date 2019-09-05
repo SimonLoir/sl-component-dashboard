@@ -24,12 +24,11 @@ body {
     $left-panel-width: 80px;
     $theme-color: rgb(46, 91, 255);
 
-
     .d-content {
         display: grid;
-        grid-template-columns: repeat(20, 250px);
+        grid-template-columns: repeat(20, 275px);
         grid-template-rows: repeat(20, 150px);
-        grid-gap: 25px;
+        grid-column-gap: 25px;
         position: absolute;
 
         top: #{$header-height + 1px};
@@ -52,6 +51,7 @@ body {
             padding-top: 70px;
             padding-bottom: 30px;
             background: white;
+            margin-bottom: 25px;
 
             .header {
                 display: inline-block;
@@ -157,8 +157,6 @@ body {
                 stroke-dashoffset: -170;
             }
 
-
-
             .clicked span {
                 background-color: transparent;
             }
@@ -180,7 +178,6 @@ body {
                 transform: rotate(180px);
                 stroke-dashoffset: 0;
             }
-
         }
 
         .items {
@@ -190,9 +187,7 @@ body {
             right: 0;
             bottom: 0;
 
-
             .wrapper {
-
                 .item {
                     position: relative;
                     height: 55px;
@@ -204,7 +199,6 @@ body {
                     }
 
                     &.selected {
-
                         border-left: 3px solid $theme-color;
                         background: rgb(239, 242, 255);
 
@@ -228,7 +222,6 @@ body {
                 }
             }
         }
-
     }
 
     header {
@@ -243,7 +236,7 @@ body {
         line-height: $header-height;
         font-size: 16px;
         font-weight: 700;
-        color: #2E384D;
+        color: #2e384d;
         padding-left: $panel-default-left-right-padding;
         padding-right: $panel-default-left-right-padding;
     }
