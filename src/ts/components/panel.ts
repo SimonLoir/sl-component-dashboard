@@ -1,5 +1,5 @@
 import { ExtJsObject } from '../tools/extjs';
-import * as Chart from 'chart.js';
+//import * as Chart from 'chart.js';
 
 export default class Panel {
     public panel: ExtJsObject;
@@ -25,7 +25,7 @@ export default class Panel {
     }
 
     public createChart(width = '100%', height = '100%') {
-        const c = this.panel
+        /*const c = this.panel
             .child('canvas')
             .css('width', width)
             .css('height', height);
@@ -71,6 +71,6 @@ export default class Panel {
                     ]
                 }
             }
-        });
+        });*/
     }
 }
