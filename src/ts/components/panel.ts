@@ -24,6 +24,36 @@ export default class Panel {
         this.panel = panel.child('div').addClass('content');
     }
 
+    public createTable(data: tableData) {
+        const table = this.panel.child('table');
+        const cat = data.categories;
+        const d = data.data;
+        const thead = table.child('thead').child('tr');
+        cat.forEach(c => {
+            thead.child('th').text(c.name);
+        });
+        const tbody = table.child('tbody');
+        d.forEach(row => {
+            const tr = tbody.child('tr');
+            row.forEach((col, i) => {
+                const td = tr.child('td');
+                const c = cat[i];
+
+                if (c.type == 'url') {
+                    const a: ExtJsObject = td.child('a').attr('href', col);
+                    a.text(c.text);
+                    a.addClass('btn');
+                    if (c.openExtenal) a.attr('target', '_blank');
+                } else if (c.type == 'date') {
+                    const d = new Date(col);
+                    td.text(d.toString());
+                } else if (c.type == 'raw') {
+                    td.text(col);
+                }
+            });
+        });
+    }
+
     public createChart(width = '100%', height = '100%') {
         /*const c = this.panel
             .child('canvas')
@@ -73,4 +103,15 @@ export default class Panel {
             }
         });*/
     }
+}
+
+export interface tableData {
+    categories: {
+        name: string;
+        type: 'raw' | 'url' | 'date';
+        text?: string;
+        format?: string;
+        openExtenal?: boolean;
+    }[];
+    data: string[][];
 }

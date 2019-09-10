@@ -71,6 +71,73 @@ body {
                 width: 100%;
                 height: 100%;
             }
+
+            button,
+            a.btn {
+                padding: 24px;
+                padding-top: 12px;
+                padding-bottom: 12px;
+                background: rgb(46, 91, 255);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-size: 12px;
+                font-weight: 700;
+                margin-right: 15px;
+
+                text-decoration: none;
+
+                &.changed {
+                    background: rgb(213, 222, 255);
+                    color: rgb(46, 91, 255)
+                }
+            }
+
+            table {
+                display: flex;
+                flex-flow: column;
+                height: 100%;
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            table thead {
+                /* head takes the height it requires, 
+                and it's not scaled when table is resized */
+                flex: 0 0 auto;
+                width: calc(100% - 0.9em);
+            }
+
+            table tbody {
+                /* body takes all the remaining available space */
+                flex: 1 1 auto;
+                display: block;
+                overflow-y: scroll;
+            }
+
+            table tbody tr {
+                width: 100%;
+            }
+
+            table thead,
+            table tbody tr {
+                display: table;
+                table-layout: fixed;
+            }
+
+            table {
+                border: none;
+            }
+
+            table td,
+            table th {
+                padding: 20px;
+                text-align: center;
+            }
+
+            table th {
+                border: none;
+            }
         }
     }
 

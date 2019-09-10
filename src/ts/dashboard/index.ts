@@ -50,7 +50,8 @@ export default class dashboard {
         items.forEach((it, i) => {
             let item = e.child('div');
             item.addClass('item');
-            if (i == 0) item.addClass('selected');
+            if (window.location.hash == it.redirectTo)
+                item.addClass('selected');
             if (it.image) item.html(it.image);
             else
                 item.html(
