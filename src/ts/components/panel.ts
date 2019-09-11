@@ -1,4 +1,4 @@
-import { ExtJsObject } from '../tools/extjs';
+import { ExtJsObject, AR } from '../tools/extjs';
 //import * as Chart from 'chart.js';
 
 export default class Panel {
@@ -29,11 +29,11 @@ export default class Panel {
         const cat = data.categories;
         const d = data.data;
         const thead = table.child('thead').child('tr');
-        cat.forEach(c => {
+        cat.forEach((c) => {
             thead.child('th').text(c.name);
         });
         const tbody = table.child('tbody');
-        d.forEach(row => {
+        d.forEach((row) => {
             const tr = tbody.child('tr');
             row.forEach((col, i) => {
                 const td = tr.child('td');
@@ -51,6 +51,14 @@ export default class Panel {
                     td.text(col);
                 }
             });
+        });
+    }
+
+    public loadTableFromURL(url: string) {
+        AR.GET(url, (data) => {
+            const d: tableData = JSON.parse(data);
+            if (d.error) return alert(d.message);
+            this.createTable(d);
         });
     }
 
@@ -106,6 +114,8 @@ export default class Panel {
 }
 
 export interface tableData {
+    error?: boolean;
+    message?: string;
     categories: {
         name: string;
         type: 'raw' | 'url' | 'date';
