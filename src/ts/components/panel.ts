@@ -43,6 +43,7 @@ export default class Panel {
                     const a: ExtJsObject = td.child('a').attr('href', col);
                     a.text(c.text);
                     a.addClass('btn');
+                    a.css('margin', '0');
                     if (c.openExtenal) a.attr('target', '_blank');
                 } else if (c.type == 'date') {
                     const d = new Date(col);
