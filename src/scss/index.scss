@@ -43,6 +43,11 @@ body {
         overflow: auto;
         margin: auto;
 
+        @media screen and (max-width: 700px) {
+            display: block;
+            padding: 15px;
+        }
+
         .panel {
             position: relative;
             border-radius: 6px;
@@ -89,7 +94,7 @@ body {
 
                 &.changed {
                     background: rgb(213, 222, 255);
-                    color: rgb(46, 91, 255)
+                    color: rgb(46, 91, 255);
                 }
             }
 
