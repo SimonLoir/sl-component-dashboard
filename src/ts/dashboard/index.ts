@@ -1,6 +1,7 @@
 import '../../scss/index.scss';
 import { $, ExtJsObject } from '../tools/extjs';
 import Panel from '../components/panel';
+import loginPage from '../login';
 
 export default class dashboard {
     private d: ExtJsObject;
@@ -8,7 +9,12 @@ export default class dashboard {
     private left_panel: ExtJsObject;
     private left_panel_items: ExtJsObject;
     private header: ExtJsObject;
-    constructor(name: string = 'Dashboard.js') {
+    public loginPage: loginPage;
+    constructor(
+        name: string = 'Dashboard.js',
+        login = false,
+        allowUserToRegister = false
+    ) {
         let d = $('body')
             .child('div')
             .addClass('sl-dashboard');
@@ -41,6 +47,11 @@ export default class dashboard {
         this.header = header;
         this.left_panel = left_panel;
         this.left_panel_items = left_panel.child('div').addClass('items');
+
+        if (login) {
+            console.log(allowUserToRegister);
+            this.loginPage = new loginPage(allowUserToRegister);
+        }
     }
     public setLeftBarItems(items: leftBarItem[]) {
         let e = this.left_panel_items;
