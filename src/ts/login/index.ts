@@ -11,6 +11,11 @@ export interface userConnectionState {
 export default class loginPage {
     private _userLoggedIn: (a: userConnectionState) => void;
     private mask: ExtJsObject;
+    public login_url = '';
+    public user_parameter_name = 'email';
+    public user__label = "Nom d'utilisateur";
+    public password_parameter_name = 'password';
+    public password__label = 'Mot de passe';
 
     constructor(public allowRegister = true) {
         console.log('New login form');
@@ -26,15 +31,28 @@ export default class loginPage {
         let loginForm = mask.child('div').addClass('sl-app-login-form');
         loginForm.child('h1').text('Me connecter');
 
-        buildInput(loginForm, "Nom d'utilisateur", 'text');
-        buildInput(loginForm, 'Mot de passe', 'password');
+        const uname = buildInput(loginForm, this.user__label, 'text');
+        const upassword = buildInput(
+            loginForm,
+            this.password__label,
+            'password'
+        );
         loginForm.child('br');
         loginForm
             .child('div')
             .css('textAlign', 'center')
             .child('button')
             .addClass('sl-app-login-form-button')
-            .text('Me connecter');
+            .text('Me connecter')
+            .click(() => {
+                let data: any = {};
+                data[this.user_parameter_name] = uname.value();
+                data[this.password_parameter_name] = upassword.value();
+                AR.POST(this.login_url, data, (data_str) => {
+                    const d = JSON.parse(data_str);
+                    if (d.isConnected == true) this._userLoggedIn(d);
+                });
+            });
         loginForm.child('br');
         loginForm.child('hr');
         if (this.allowRegister) {
@@ -100,8 +118,8 @@ export default class loginPage {
             });
     }
 
-    public onLogin(_userLoggedIn: (a: userConnectionState) => void) {
-        this._userLoggedIn = (a: userConnectionState) => {
+    public onLogin(_userLoggedIn: (a: any) => void) {
+        this._userLoggedIn = (a: any) => {
             _userLoggedIn(a);
             this.mask.remove();
         };
@@ -109,7 +127,7 @@ export default class loginPage {
     }
 
     public tryLogin() {
-        AR.GET('../api/index.php?res=userConnectionState', (data: any) => {
+        AR.GET(this.login_url, (data: any) => {
             const d: userConnectionState = JSON.parse(data);
             if (d.isConnected == true) {
                 this._userLoggedIn(d);
@@ -118,7 +136,7 @@ export default class loginPage {
     }
 }
 
-function buildInput(
+export function buildInput(
     parent: ExtJsObject,
     label_text: string,
     type: string,
@@ -131,7 +149,7 @@ function buildInput(
         'range',
         'date',
         'time',
-        'email'
+        'email',
     ];
     let other_types = ['textarea', 'select'];
 

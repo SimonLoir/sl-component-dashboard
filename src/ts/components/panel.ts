@@ -3,20 +3,9 @@ import { ExtJsObject, AR } from '../tools/extjs';
 
 export default class Panel {
     public panel: ExtJsObject;
-    constructor(
-        dc: ExtJsObject,
-        title: string,
-        col: number,
-        row: number,
-        spanCol = 1,
-        spanRow = 1
-    ) {
+    constructor(dc: ExtJsObject, title: string) {
         let panel = dc.child('div');
         panel.addClass('panel');
-        panel.css('gridColumnStart', col.toString());
-        panel.css('gridRowStart', row.toString());
-        panel.css('gridColumnEnd', (col + spanCol).toString());
-        panel.css('gridRowEnd', (row + spanRow).toString());
         panel
             .child('div')
             .addClass('header')

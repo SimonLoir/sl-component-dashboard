@@ -1,73 +1,6 @@
 $color: #4285f4;
 
-%field {
-    position: relative;
-    margin: 16px 0;
-    margin-top: 24px;
-    padding: 4px;
-
-    & .top {
-        display: block;
-        position: absolute;
-        top: 10px;
-        left: 2px;
-        color: #6f6f6f;
-        transition: 0.29s;
-        transform-origin: left;
-    }
-
-    &.focus .top,
-    &.notempty .top {
-        position: absolute;
-        top: 2px;
-        transform: translateY(-75%) scale(0.75);
-    }
-
-    &.focus .top {
-        color: #2474d1;
-    }
-
-    & input,
-    & textarea,
-    & select {
-        position: relative;
-        display: block;
-        padding: 8px;
-        padding-left: 2px;
-        border: none;
-        width: 100%;
-        outline: none;
-        background: transparent;
-        font-family: 'Roboto', sans-serif;
-    }
-
-    & textarea {
-        resize: vertical;
-        height: 100px;
-    }
-
-    &::after,
-    &::before {
-        content: '';
-        height: 2px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: #cccccc;
-    }
-
-    &::after {
-        background: #2474d1;
-        transform: scaleX(0);
-        transition: 0.29s;
-    }
-
-    &.focus::after {
-        transform: scaleX(1);
-    }
-}
-
+@import '../../scss/field.scss';
 %button {
     color: white;
     border: none;
@@ -75,7 +8,6 @@ $color: #4285f4;
     border-radius: 1.25rem;
     cursor: pointer;
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.08);
-
 }
 
 .sl-app-login-form-mask {
@@ -89,51 +21,69 @@ $color: #4285f4;
     background: white;
     display: grid;
     place-items: center;
-    background: linear-gradient(55deg,
+    background: linear-gradient(
+            55deg,
             rgba(40, 40, 40, 0.09) 0%,
             rgba(40, 40, 40, 0.09) 50%,
             rgba(186, 186, 186, 0.09) 50%,
-            rgba(186, 186, 186, 0.09) 100%),
-        linear-gradient(116deg,
+            rgba(186, 186, 186, 0.09) 100%
+        ),
+        linear-gradient(
+            116deg,
             rgba(156, 156, 156, 0.07) 0%,
             rgba(156, 156, 156, 0.07) 50%,
             rgba(77, 77, 77, 0.07) 50%,
-            rgba(77, 77, 77, 0.07) 100%),
-        linear-gradient(57deg,
+            rgba(77, 77, 77, 0.07) 100%
+        ),
+        linear-gradient(
+            57deg,
             rgba(73, 73, 73, 0.07) 0%,
             rgba(73, 73, 73, 0.07) 50%,
             rgba(44, 44, 44, 0.07) 50%,
-            rgba(44, 44, 44, 0.07) 100%),
-        linear-gradient(103deg,
+            rgba(44, 44, 44, 0.07) 100%
+        ),
+        linear-gradient(
+            103deg,
             rgba(187, 187, 187, 0.1) 0%,
             rgba(187, 187, 187, 0.1) 50%,
             rgba(10, 10, 10, 0.1) 50%,
-            rgba(10, 10, 10, 0.1) 100%),
-        linear-gradient(42deg,
+            rgba(10, 10, 10, 0.1) 100%
+        ),
+        linear-gradient(
+            42deg,
             rgba(200, 200, 200, 0.08) 0%,
             rgba(200, 200, 200, 0.08) 50%,
             rgba(58, 58, 58, 0.08) 50%,
-            rgba(58, 58, 58, 0.08) 100%),
-        linear-gradient(211deg,
+            rgba(58, 58, 58, 0.08) 100%
+        ),
+        linear-gradient(
+            211deg,
             rgba(160, 160, 160, 0.1) 0%,
             rgba(160, 160, 160, 0.1) 50%,
             rgba(73, 73, 73, 0.1) 50%,
-            rgba(73, 73, 73, 0.1) 100%),
-        linear-gradient(48deg,
+            rgba(73, 73, 73, 0.1) 100%
+        ),
+        linear-gradient(
+            48deg,
             rgba(7, 7, 7, 0.09) 0%,
             rgba(7, 7, 7, 0.09) 50%,
             rgba(69, 69, 69, 0.09) 50%,
-            rgba(69, 69, 69, 0.09) 100%),
-        linear-gradient(15deg,
+            rgba(69, 69, 69, 0.09) 100%
+        ),
+        linear-gradient(
+            15deg,
             rgba(172, 172, 172, 0.07) 0%,
             rgba(172, 172, 172, 0.07) 50%,
             rgba(105, 105, 105, 0.07) 50%,
-            rgba(105, 105, 105, 0.07) 100%),
-        linear-gradient(154deg,
+            rgba(105, 105, 105, 0.07) 100%
+        ),
+        linear-gradient(
+            154deg,
             rgba(220, 220, 220, 0.02) 0%,
             rgba(220, 220, 220, 0.02) 50%,
             rgba(134, 134, 134, 0.02) 50%,
-            rgba(134, 134, 134, 0.02) 100%),
+            rgba(134, 134, 134, 0.02) 100%
+        ),
         linear-gradient(90deg, rgb(64, 80, 215), rgb(13, 206, 230));
 
     & .sl-app-login-form {
@@ -155,7 +105,12 @@ $color: #4285f4;
             $gray: rgba(0, 0, 0, 0.01);
             $black: rgba(0, 0, 0, 0.15);
             background: rgba(0, 0, 0, 0.12);
-            background: linear-gradient(to right, #{$gray} 10%, $black, #{$gray} 90%);
+            background: linear-gradient(
+                to right,
+                #{$gray} 10%,
+                $black,
+                #{$gray} 90%
+            );
         }
     }
 

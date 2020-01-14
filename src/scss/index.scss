@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-
+@import './field.scss';
 html,
 body {
     margin: 0;
@@ -16,20 +16,15 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgb(244, 246, 252);
 
     $panel-text-color: rgb(209, 213, 223);
     $panel-border-color: rgb(228, 232, 240);
-    $panel-default-left-right-padding: 110px;
-    $header-height: 80px;
-    $left-panel-width: 80px;
-    $theme-color: rgb(46, 91, 255);
+    $panel-default-left-right-padding: 25px;
+    $header-height: 60px;
+    $left-panel-width: 60px;
+    $theme-color: rgb(241, 241, 241);
 
     .d-content {
-        display: grid;
-        grid-template-columns: repeat(20, 275px);
-        grid-template-rows: repeat(20, 150px);
-        grid-column-gap: 25px;
         position: absolute;
 
         top: #{$header-height + 1px};
@@ -37,17 +32,15 @@ body {
         bottom: 0;
         right: 0;
 
-        padding: 65px;
-        padding-left: $panel-default-left-right-padding;
-        padding-right: $panel-default-left-right-padding;
+        $padding: 15px;
+
+        padding: $padding;
 
         overflow: auto;
         margin: auto;
 
-        @media screen and (max-width: 700px) {
-            display: block;
-            padding: 15px;
-        }
+        background: rgb(245, 245, 245);
+        transition: left 0.75s;
 
         .panel {
             position: relative;
@@ -57,7 +50,8 @@ body {
             padding-top: 70px;
             padding-bottom: 30px;
             background: white;
-            margin-bottom: 25px;
+            margin-bottom: $padding;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.025);
 
             .header {
                 display: inline-block;
@@ -66,7 +60,11 @@ body {
                 top: 32px;
                 color: rgb(135, 152, 173);
                 text-transform: uppercase;
-                font-size: 9px;
+                font-size: 12px;
+            }
+
+            & .field {
+                @extend %field;
             }
 
             .content {
@@ -76,6 +74,7 @@ body {
                 margin: 0;
                 width: 100%;
                 height: 100%;
+                overflow: auto;
             }
 
             button,
@@ -99,65 +98,45 @@ body {
                 }
             }
 
+            .sorter {
+                padding-bottom: 25px;
+            }
+
+            input,
+            select {
+                padding: 8px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                border-radius: 6px;
+                font-size: 12px;
+                font-weight: 700;
+                margin-right: 5px;
+                border: 1px solid #eee;
+            }
+
             .table {
                 border-collapse: collapse;
                 width: 100%;
+                border-radius: 6px;
+                overflow: hidden;
                 & td,
                 & th {
-                    border: 1px solid #dddddd;
+                    border: 1px solid #eee;
                     text-align: left;
                     padding: 8px;
                 }
 
                 & tr:nth-child(even) {
-                    background-color: #dddddd;
+                    background-color: #eee;
                 }
             }
 
-            > table {
-                display: flex;
-                flex-flow: column;
-                height: 100%;
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-            > table thead {
-                /* head takes the height it requires, 
-                and it's not scaled when table is resized */
-                flex: 0 0 auto;
-                width: calc(100% - 0.9em);
-            }
-
-            > table tbody {
-                /* body takes all the remaining available space */
-                flex: 1 1 auto;
-                display: block;
-                overflow-y: scroll;
-            }
-
-            > table tbody tr {
-                width: 100%;
-            }
-
-            > table thead,
-            > table tbody tr {
-                display: table;
-                table-layout: fixed;
-            }
-
-            > table {
-                border: none;
-            }
-
-            > table td,
-            > table th {
-                padding: 20px;
-                text-align: center;
-            }
-
-            > table th {
-                border: none;
+            table {
+                & .add_padding {
+                    td {
+                        padding: 8px;
+                    }
+                }
             }
         }
     }
@@ -240,7 +219,7 @@ body {
                 transition: stroke-dashoffset 1s;
                 fill: transparent;
                 stroke-width: 2;
-                stroke: gray;
+                stroke: transparent;
                 stroke-dasharray: 170;
                 stroke-dashoffset: -170;
             }
@@ -269,11 +248,8 @@ body {
         }
 
         .items {
-            position: absolute;
-            top: 220px;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            position: relative;
+            cursor: pointer;
 
             .wrapper {
                 .item {
@@ -287,11 +263,11 @@ body {
                     }
 
                     &.selected {
-                        border-left: 3px solid $theme-color;
-                        background: rgb(239, 242, 255);
+                        border-left: 3px solid gray;
+                        background: $theme-color;
 
                         svg {
-                            fill: $theme-color;
+                            fill: gray;
                         }
                     }
 
@@ -327,5 +303,15 @@ body {
         color: #2e384d;
         padding-left: $panel-default-left-right-padding;
         padding-right: $panel-default-left-right-padding;
+    }
+
+    &.extended {
+        .d-content {
+            left: 0;
+        }
+
+        .left-panel-hamburger-square {
+            border-bottom: 1px solid $panel-border-color;
+        }
     }
 }

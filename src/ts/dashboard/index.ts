@@ -28,17 +28,23 @@ export default class dashboard {
             .addClass('left-panel-hamburger-square');
 
         square.html(
-            `<div class="hamburger none"><span></span><svg x="0" y="0" width="54px" height="54px" viewBox="0 0 54 54"> <circle cx="27" cy="27" r="26"></circle> </svg> </div>`
+            `<div class="hamburger none clicked"><span></span><svg x="0" y="0" width="54px" height="54px" viewBox="0 0 54 54"> <circle cx="27" cy="27" r="26"></circle> </svg> </div>`
         );
 
         square.children('.hamburger').click(function() {
             let e: HTMLDivElement = this;
             if (e.classList.contains('clicked')) {
                 $(this).removeClass('clicked');
+                $('.sl-dashboard').addClass('extended');
             } else {
                 $(this).addClass('clicked');
+                $('.sl-dashboard').removeClass('extended');
             }
         });
+
+        if (window.innerWidth <= 700) {
+            square.children('.hamburger').click();
+        }
 
         let dc = d.child('div').addClass('d-content');
 
@@ -54,6 +60,13 @@ export default class dashboard {
         }
     }
     public setLeftBarItems(items: leftBarItem[]) {
+        this.buildLeftBar(items);
+        window.addEventListener('hashchange', () => {
+            this.buildLeftBar(items);
+        });
+    }
+
+    public buildLeftBar(items: leftBarItem[]) {
         let e = this.left_panel_items;
         e.html('');
         e = e.child('div');
@@ -75,6 +88,11 @@ export default class dashboard {
                 window.location.href = it.redirectTo;
                 $('.selected').removeClass('selected');
                 item.addClass('selected');
+                if (window.innerWidth <= 700) {
+                    $('.left-panel-hamburger-square')
+                        .children('.hamburger')
+                        .click();
+                }
             });
         });
     }
@@ -83,14 +101,8 @@ export default class dashboard {
         this.dc.html('');
     }
 
-    public createPanel(
-        title: string,
-        col: number,
-        row: number,
-        spanCol = 1,
-        spanRow = 1
-    ) {
-        return new Panel(this.dc, title, col, row, spanCol, spanRow);
+    public createPanel(title: string) {
+        return new Panel(this.dc, title);
     }
 }
 
