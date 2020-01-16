@@ -88,7 +88,7 @@ export default class loginPage {
         let loginForm = mask.child('div').addClass('sl-app-login-form');
         loginForm.child('h1').text('Créer un compte');
 
-        let username = buildInput(loginForm, "Nom d'utilisateur", 'text');
+        let username = buildInput(loginForm, 'Nom et prénom', 'text');
         let email = buildInput(loginForm, 'Email', 'email');
         let password = buildInput(loginForm, 'Mot de passe', 'password');
         let password_confirm = buildInput(
