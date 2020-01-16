@@ -588,7 +588,7 @@ export class ExtJsObject {
     //@ts-ignore
     cssObj(obj: { [id: keyof CSSStyleDeclaration]: string }) {
         let keys = Object.keys(obj);
-        keys.forEach(key => {
+        keys.forEach((key) => {
             //@ts-ignore
             this.css(key, obj[key]);
         });
@@ -635,7 +635,7 @@ class AjaxRequest {
                 if (i !== 0) {
                     d = d + '&';
                 }
-                d = d + keys[i] + '=' + data[keys[i]];
+                d = d + keys[i] + '=' + encodeURIComponent(data[keys[i]]);
             }
             xhttp.setRequestHeader(
                 'Content-type',
