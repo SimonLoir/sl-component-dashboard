@@ -17,9 +17,14 @@ export default class loginPage {
     public password_parameter_name = 'password';
     public password__label = 'Mot de passe';
 
+    public login_title = 'Me connecter';
+    public login_button_title = 'Me connecter';
+    public login_register_not_available =
+        "La création de compte n'est pas activée";
+
     constructor(public allowRegister = true) {
         console.log('New login form');
-        this.loginForm(true);
+        //this.loginForm(true);
     }
 
     public loginForm(load: any = undefined) {
@@ -29,7 +34,7 @@ export default class loginPage {
         this.mask = mask;
 
         let loginForm = mask.child('div').addClass('sl-app-login-form');
-        loginForm.child('h1').text('Me connecter');
+        loginForm.child('h1').text(this.login_title);
 
         const uname = buildInput(loginForm, this.user__label, 'text');
         const upassword = buildInput(
@@ -43,7 +48,7 @@ export default class loginPage {
             .css('textAlign', 'center')
             .child('button')
             .addClass('sl-app-login-form-button')
-            .text('Me connecter')
+            .text(this.login_button_title)
             .click(() => {
                 let data: any = {};
                 data[this.user_parameter_name] = uname.value();
@@ -74,7 +79,7 @@ export default class loginPage {
             loginForm
                 .child('p')
                 .css('textAlign', 'center')
-                .text("La création de compte n'est pas activée");
+                .text(this.login_register_not_available);
         }
     }
 
