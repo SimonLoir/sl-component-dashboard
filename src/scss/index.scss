@@ -127,41 +127,53 @@ body {
                     padding: 8px;
                 }
 
-                & tr:nth-child(even) {
-                    background-color: #eee;
+                & tr:nth-child(odd) {
+                    background-color: rgb(245, 245, 245);
+                }
+                & tr:nth-of-type(1) {
+                    //background: #1144ff;
+                    th {
+                        //border: 1px solid #1144ff;
+                        //color: white;
+                        $pad: 12px;
+                        padding-top: $pad;
+                        padding-bottom: $pad;
+                    }
                 }
 
-                @media only screen and (max-width: 760px),
-                    (min-device-width: 768px) and (max-device-width: 1024px) {
-                    /* Force table to not be like tables anymore */
-                    thead,
-                    tbody,
-                    th,
-                    td,
-                    tr,
-                    & {
-                        display: block;
-                    }
-                    th {
-                        display: none;
-                    }
+                &:not(.invoice-table) {
+                    @media only screen and (max-width: 760px),
+                        (min-device-width: 768px) and (max-device-width: 1024px) {
+                        /* Force table to not be like tables anymore */
+                        thead,
+                        tbody,
+                        th,
+                        td,
+                        tr,
+                        & {
+                            display: block;
+                        }
+                        th {
+                            display: none;
+                        }
 
-                    td {
-                        /* Behave  like a "row" */
-                        border: none;
-                        position: relative;
-                        padding-left: 50%;
-                    }
+                        td {
+                            /* Behave  like a "row" */
+                            border: none;
+                            position: relative;
+                            padding-left: 50%;
+                        }
 
-                    td:before {
-                        /* Now like a table header */
-                        position: absolute;
-                        /* Top/left values mimic padding */
-                        top: 6px;
-                        left: 6px;
-                        width: 45%;
-                        padding-right: 10px;
-                        white-space: nowrap;
+                        td:before {
+                            /* Now like a table header */
+                            position: absolute;
+                            /* Top/left values mimic padding */
+                            top: 6px;
+                            left: 6px;
+                            width: 45%;
+                            padding-right: 10px;
+                            white-space: nowrap;
+                        }
                     }
                 }
             }
