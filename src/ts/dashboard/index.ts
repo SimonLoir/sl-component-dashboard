@@ -2,6 +2,7 @@ import '../../scss/index.scss';
 import { $, ExtJsObject } from '../tools/extjs';
 import Panel from '../components/panel';
 import loginPage from '../login';
+import Grouper from '../components/grouper';
 
 export default class dashboard {
     private d: ExtJsObject;
@@ -101,8 +102,12 @@ export default class dashboard {
         this.dc.html('');
     }
 
-    public createPanel(title: string) {
-        return new Panel(this.dc, title);
+    public createPanel(title: string, grouper?: ExtJsObject) {
+        return new Panel(grouper ? grouper : this.dc, title);
+    }
+
+    public createGrouper(title: string, closed = false) {
+        return new Grouper(this.dc, title, closed);
     }
 }
 
