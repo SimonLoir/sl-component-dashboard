@@ -145,7 +145,7 @@ export function buildInput(
     parent: ExtJsObject,
     label_text: string,
     type: string,
-    default_value?: string
+    default_value: string = undefined
 ): ExtJsObject {
     let input_types = [
         'text',
@@ -156,7 +156,7 @@ export function buildInput(
         'time',
         'email',
     ];
-    let other_types = ['textarea', 'select'];
+    let other_types = ['textarea', 'select', 'div'];
 
     let div = parent.child('div').addClass('field');
 
@@ -167,38 +167,63 @@ export function buildInput(
 
     let input: ExtJsObject;
 
-    if (input_types.indexOf(type) >= 0) {
-        input = div.child('input').addClass('input');
-        input.get(0).type = type;
-    } else {
-        input = div
-            .child(type)
-            .addClass('input')
-            .addClass(type);
-    }
+    if (type == 'div') {
+        input = div.child('div');
+        input.html(default_value);
+        input.attr('contenteditable', 'true');
+        input.addClass('input');
 
-    let i = input.get(0);
+        let i = input.get(0);
 
-    i.onfocus = function() {
-        this.parentElement.classList.add('focus');
-        if (this.parentElement.classList.contains('notempty')) {
-            this.parentElement.classList.remove('notempty');
-        }
-    };
+        i.onfocus = function() {
+            this.parentElement.classList.add('focus');
+            if (this.parentElement.classList.contains('notempty')) {
+                this.parentElement.classList.remove('notempty');
+            }
+        };
 
-    i.onblur = function() {
-        if (type != 'date' && type != 'time') {
+        i.onblur = function() {
             this.parentElement.classList.remove('focus');
+            if (this.innerText != '') {
+                this.parentElement.classList.add('notempty');
+            }
+        };
+        i.onfocus();
+        i.onblur();
+    } else {
+        if (input_types.indexOf(type) >= 0) {
+            input = div.child('input').addClass('input');
+            input.get(0).type = type;
+        } else {
+            input = div
+                .child(type)
+                .addClass('input')
+                .addClass(type);
         }
-        if (this.value != '') {
-            this.parentElement.classList.add('notempty');
-        }
-    };
 
-    if (default_value) input.value(default_value);
+        let i = input.get(0);
 
-    i.onfocus();
-    i.onblur();
+        i.onfocus = function() {
+            this.parentElement.classList.add('focus');
+            if (this.parentElement.classList.contains('notempty')) {
+                this.parentElement.classList.remove('notempty');
+            }
+        };
+
+        i.onblur = function() {
+            if (type != 'date' && type != 'time') {
+                this.parentElement.classList.remove('focus');
+            }
+            if (this.value != '') {
+                this.parentElement.classList.add('notempty');
+            }
+        };
+
+        if (default_value) input.value(default_value);
+
+        i.onfocus();
+        i.onblur();
+    }
 
     return input;
 }
